@@ -28,9 +28,19 @@ DELETE FROM Students WHERE student_id = 5;
 
 -- SELECT with WHERE: find students enrolled on a specific date
 SELECT * FROM Students WHERE enrollment_date = '2023-09-01';
-SELECT * FROM Students;-- === Member B: Classroom table ===
+
+SELECT * FROM Students;
+
+
+-- === Member B (Chavyra BANGADI): Classroom table ===
+
+-- Step 1: Select the shared database so this table is created inside alu_db
 USE alu_db;
 
+-- Step 2: Create the Classroom table
+-- classroom_id is the primary key, auto-incremented for each new room
+-- room_number and building identify the physical location
+-- capacity stores the maximum number of students the room can hold
 CREATE TABLE Classroom (
     classroom_id INT AUTO_INCREMENT PRIMARY KEY,
     room_number  VARCHAR(10)  NOT NULL,
@@ -38,6 +48,7 @@ CREATE TABLE Classroom (
     capacity     INT          NOT NULL
 );
 
+-- Step 3: Insert 5 sample classrooms so the table has data to work with
 INSERT INTO Classroom (room_number, building, capacity) VALUES
 ('101', 'Innovation Hall', 30),
 ('102', 'Innovation Hall', 25),
@@ -45,16 +56,19 @@ INSERT INTO Classroom (room_number, building, capacity) VALUES
 ('202', 'Science Block',   35),
 ('305', 'Library Annex',   20);
 
--- UPDATE
+-- Step 4: UPDATE - increase the capacity of room 201 in Science Block
+-- This simulates a real-world change (e.g. the room was expanded)
 UPDATE Classroom
 SET capacity = 45
 WHERE room_number = '201' AND building = 'Science Block';
 
--- DELETE
+-- Step 5: DELETE - remove room 305 in Library Annex from the table
+-- This simulates a room being taken out of service
 DELETE FROM Classroom
 WHERE room_number = '305' AND building = 'Library Annex';
 
--- SELECT with WHERE
+-- Step 6: SELECT with WHERE - retrieve every classroom located in Innovation Hall
+-- Demonstrates filtering rows based on a specific column value
 SELECT *
 FROM Classroom
 WHERE building = 'Innovation Hall';
