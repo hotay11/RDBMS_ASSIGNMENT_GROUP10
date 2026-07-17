@@ -213,9 +213,9 @@ WHERE activity_name = 'Chess Club';
 
 -- DELETE: remove a specific student's activity record
 DELETE FROM Student_Activities
-WHERE student_id = 5 AND activity_id = 4;
+WHERE student_id = 4 AND activity_id = 4;
 
 -- SELECT with WHERE: all activities advised by faculty_id = 1
 SELECT activity_id, activity_name, activity_type, meeting_day
 FROM Extra_Curricular_Activities
-WHERE advisor_id = 1;
+iHERE advisor_id = 1;
