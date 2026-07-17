@@ -220,6 +220,7 @@ SELECT activity_id, activity_name, activity_type, meeting_day
 FROM Extra_Curricular_Activities
 WHERE advisor_id = 1;
 
+-- MEMBER (Prince Ganza): Data Integrity Checks and Join Queries
 -- Check Courses -> Faculty
 SELECT * FROM Courses c
 LEFT JOIN Faculty f ON c.faculty_id = f.faculty_id
