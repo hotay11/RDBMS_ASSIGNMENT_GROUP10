@@ -125,7 +125,7 @@ CREATE TABLE Courses (
 INSERT INTO Courses (course_name, credits, faculty_id, classroom_id) VALUES
 ('Introduction to Programming', 3, 1, 1),
 ('Database Systems', 4, 2, 2),
-('Computer science', 3, 3, 3),
+('Computer Science', 3, 3, 3),
 ('Law', 2, 5, 4),
 ('Engineering Mechanics', 4, 1, 2);
 
@@ -134,9 +134,9 @@ UPDATE Courses
 SET credits = 5
 WHERE course_id = 2;  -- course_id for Database Systems
 
--- Step 4: DELETE - remove Business Law course
+-- Step 4: DELETE - remove Law course
 DELETE FROM Courses
-WHERE course_id = 4;  -- course_id for Business Law
+WHERE course_id = 4;  -- course_id for Law
 
 -- Step 5: SELECT with WHERE - find all courses worth 4 credits
 SELECT *
