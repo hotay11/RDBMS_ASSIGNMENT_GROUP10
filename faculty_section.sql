@@ -202,7 +202,7 @@ INSERT INTO Student_Activities (student_id, activity_id, join_date) VALUES
 (2, 1, '2026-01-20'),
 (3, 2, '2026-01-21'),
 (4, 3, '2026-01-22'),
-(5, 4, '2026-01-23');
+(2, 4, '2026-01-23');
 
 -- MEMBER E — Individual UPDATE / DELETE / SELECT
 
