@@ -107,7 +107,7 @@ SELECT *
 FROM Faculty
 WHERE department='Law';
 
--- === Member D (Your Name): Courses table ===
+-- === Member D (Manzi Luc Divin): Courses table ===
 USE alu_db;
 
 CREATE TABLE Courses (
