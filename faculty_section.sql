@@ -72,3 +72,33 @@ WHERE room_number = '305' AND building = 'Library Annex';
 SELECT *
 FROM Classroom
 WHERE building = 'Innovation Hall';
+
+
+
+-- Member C (Ezra Prince Situma): Faculty Table --
+
+CREATE TABLE Faculty (
+    faculty_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    department VARCHAR(50)
+);
+
+INSERT INTO Faculty (name, email, department)
+VALUES
+('Dr. Alice Johnson','alice.johnson@alu.edu','Computer Science'),
+('Prof. Brian Smith','brian.smith@alu.edu','Mathematics'),
+('Dr. Catherine Brown','catherine.brown@alu.edu','Business'),
+('Dr. Daniel Kim','daniel.kim@alu.edu','Engineering'),
+('Prof. Emily Davis','emily.davis@alu.edu','Law');
+
+UPDATE Faculty
+SET department='Data Science'
+WHERE faculty_id=1;
+
+DELETE FROM Faculty
+WHERE faculty_id=4;
+
+SELECT *
+FROM Faculty
+WHERE department='Law';
