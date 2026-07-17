@@ -220,6 +220,3 @@ WHERE student_id = 5 AND activity_id = 4;
 SELECT activity_id, activity_name, activity_type, meeting_day
 FROM Extra_Curricular_Activities
 WHERE advisor_id = 1;
-=======
-WHERE credits = 4;   
->>>>>>> 4826d0904e9820b9d703d1f5f7c21bc2279fff7f
