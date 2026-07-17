@@ -106,3 +106,37 @@ WHERE faculty_id=4;
 SELECT *
 FROM Faculty
 WHERE department='Law';
+
+-- === Member D (Your Name): Courses table ===
+USE alu_db;
+
+CREATE TABLE Courses (
+    course_id INT AUTO_INCREMENT PRIMARY KEY,
+    course_name VARCHAR(100) NOT NULL,
+    credits INT NOT NULL,
+    faculty_id INT,
+    classroom_id INT,
+    FOREIGN KEY (faculty_id) REFERENCES Faculty(faculty_id),
+    FOREIGN KEY (classroom_id) REFERENCES Classroom(classroom_id)
+);
+
+INSERT INTO Courses (course_name, credits, faculty_id, classroom_id) VALUES
+('Introduction to Programming', 3, 1, 1),
+('Database Systems', 4, 2, 2),
+('Computer science', 3, 3, 3),
+('Law', 2, 5, 4),
+('Engineering Mechanics', 4, 1, 2);
+
+-- UPDATE
+UPDATE Courses
+SET credits = 5
+WHERE course_id = 2;
+
+-- DELETE
+DELETE FROM Courses
+WHERE course_id = 4;
+
+-- SELECT with WHERE
+SELECT *
+FROM Courses
+WHERE credits = 4;
