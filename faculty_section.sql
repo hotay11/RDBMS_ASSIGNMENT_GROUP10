@@ -141,7 +141,6 @@ WHERE course_id = 4;  -- course_id for Business Law
 -- Step 5: SELECT with WHERE - find all courses worth 4 credits
 SELECT *
 FROM Courses
-<<<<<<< HEAD
 WHERE credits = 4;
 
 -- == MEMBER E (Bugingo Nshuti Brandon)  (Student_Courses, Student_Activities) ==
