@@ -213,9 +213,72 @@ WHERE activity_name = 'Chess Club';
 
 -- DELETE: remove a specific student's activity record
 DELETE FROM Student_Activities
-WHERE student_id = 4 AND activity_id = 3;
+WHERE student_id = 4 AND activity_id = 4;
 
 -- SELECT with WHERE: all activities advised by faculty_id = 1
 SELECT activity_id, activity_name, activity_type, meeting_day
 FROM Extra_Curricular_Activities
 WHERE advisor_id = 1;
+
+-- Check Courses -> Faculty
+SELECT * FROM Courses c
+LEFT JOIN Faculty f ON c.faculty_id = f.faculty_id
+WHERE c.faculty_id IS NOT NULL AND f.faculty_id IS NULL;
+
+-- Check Courses -> Classroom
+SELECT * FROM Courses c
+LEFT JOIN Classroom cl ON c.classroom_id = cl.classroom_id
+WHERE c.classroom_id IS NOT NULL AND cl.classroom_id IS NULL;
+
+-- Check Student_Courses -> Students and Courses
+SELECT * FROM Student_Courses sc
+LEFT JOIN Students s ON sc.student_id = s.student_id
+LEFT JOIN Courses c ON sc.course_id = c.course_id
+WHERE s.student_id IS NULL OR c.course_id IS NULL;
+
+-- Check Student_Activities -> Students and Activities
+SELECT * FROM Student_Activities sa
+LEFT JOIN Students s ON sa.student_id = s.student_id
+LEFT JOIN Extra_Curricular_Activities a ON sa.activity_id = a.activity_id
+WHERE s.student_id IS NULL OR a.activity_id IS NULL;
+
+-- Check Extra_Curricular_Activities -> Faculty
+SELECT * FROM Extra_Curricular_Activities a
+LEFT JOIN Faculty f ON a.advisor_id = f.faculty_id
+WHERE a.advisor_id IS NOT NULL AND f.faculty_id IS NULL;
+
+-- Normalization Check:
+-- All information is stored only once in its own table (Students, Classroom,
+--It is referenced only by other tables such as -- Faculty, Courses, Extra_Curricular_Activities.
+-- In terms of the ID, but not repeating information such as names or departments. The many-to-many
+-- relationships between Students and Courses and between Students and Activities.
+--Using junction tables (Student_Courses, Student_Activities) correctly solves the problems: --
+-- student, registration, and date information, while eliminating duplicate student, registration, and date data.
+--Data for -- course, or activity.
+
+-- Join Query 1: Student enrolled in a course, taught by faculty, in a classroom
+SELECT s.first_name, s.last_name, co.course_name, f.name AS faculty_name, cl.room_number
+FROM Students s
+JOIN Student_Courses sc ON s.student_id = sc.student_id
+JOIN Courses co ON sc.course_id = co.course_id
+JOIN Faculty f ON co.faculty_id = f.faculty_id
+JOIN Classroom cl ON co.classroom_id = cl.classroom_id;
+
+-- Join Query 2: Student participates in an activity, advised by faculty
+SELECT s.first_name, s.last_name, a.activity_name, f.name AS advisor_name
+FROM Students s
+JOIN Student_Activities sa ON s.student_id = sa.student_id
+JOIN Extra_Curricular_Activities a ON sa.activity_id = a.activity_id
+JOIN Faculty f ON a.advisor_id = f.faculty_id;
+
+-- Join Query 3: Faculty and the courses they teach, with classroom location
+SELECT f.name AS faculty_name, co.course_name, cl.room_number, cl.building
+FROM Faculty f
+JOIN Courses co ON f.faculty_id = co.faculty_id
+JOIN Classroom cl ON co.classroom_id = cl.classroom_id;
+
+-- Aggregate Query: number of students enrolled per course
+SELECT co.course_name, COUNT(sc.student_id) AS num_students
+FROM Courses co
+LEFT JOIN Student_Courses sc ON co.course_id = sc.course_id
+GROUP BY co.course_name;
