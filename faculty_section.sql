@@ -1,3 +1,6 @@
+-- Creating database for the project
+CREATE DATABASE IF NOT EXISTS alu_db;
+
 -- === Member A (Joshua hotay): Students table ===
 
 USE alu_db;
@@ -77,6 +80,7 @@ WHERE building = 'Innovation Hall';
 
 -- Member C (Ezra Prince Situma): Faculty Table --
 
+use alu_db;
 CREATE TABLE Faculty (
     faculty_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
