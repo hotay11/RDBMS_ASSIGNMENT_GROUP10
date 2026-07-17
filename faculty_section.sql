@@ -80,7 +80,7 @@ WHERE building = 'Innovation Hall';
 
 -- Member C (Ezra Prince Situma): Faculty Table --
 
-use alu_db;
+-- Create the Faculty table with the required columns
 CREATE TABLE Faculty (
     faculty_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -88,24 +88,28 @@ CREATE TABLE Faculty (
     department VARCHAR(50)
 );
 
+-- Insert five sample faculty records into the Faculty table
 INSERT INTO Faculty (name, email, department)
 VALUES
-('Dr. Alice Johnson','alice.johnson@alu.edu','Computer Science'),
-('Prof. Brian Smith','brian.smith@alu.edu','Mathematics'),
-('Dr. Catherine Brown','catherine.brown@alu.edu','Business'),
-('Dr. Daniel Kim','daniel.kim@alu.edu','Engineering'),
-('Prof. Emily Davis','emily.davis@alu.edu','Law');
+('Dr. Alice Johnson', 'alice.johnson@alu.edu', 'Computer Science'),
+('Prof. Brian Smith', 'brian.smith@alu.edu', 'Mathematics'),
+('Dr. Catherine Brown', 'catherine.brown@alu.edu', 'Business'),
+('Dr. Daniel Kim', 'daniel.kim@alu.edu', 'Engineering'),
+('Prof. Emily Davis', 'emily.davis@alu.edu', 'Law');
 
+-- Update the department of Faculty member with ID 1
 UPDATE Faculty
-SET department='Data Science'
-WHERE faculty_id=1;
+SET department = 'Data Science'
+WHERE faculty_id = 1;
 
+-- Delete the Faculty member with ID 4
 DELETE FROM Faculty
-WHERE faculty_id=4;
+WHERE faculty_id = 4;
 
+-- Retrieve all Faculty members in the Law department
 SELECT *
 FROM Faculty
-WHERE department='Law';
+WHERE department = 'Law';
 
 -- === Member D (Manzi Luc Divin): Courses table ===
 USE alu_db;
