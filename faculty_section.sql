@@ -140,3 +140,80 @@ WHERE course_id = 4;
 SELECT *
 FROM Courses
 WHERE credits = 4;
+
+-- == MEMBER E (Bugingo Nshuti Brandon)  (Student_Courses, Student_Activities) ==
+USE alu_db;
+-- 1. Extra_Curricular_Activities table
+CREATE TABLE Extra_Curricular_Activities (
+    activity_id     INT AUTO_INCREMENT PRIMARY KEY,
+    activity_name   VARCHAR(100) NOT NULL,
+    activity_type   VARCHAR(50),          
+    meeting_day     VARCHAR(20),
+    advisor_id      INT,          
+    CONSTRAINT fk_activity_advisor
+        FOREIGN KEY (advisor_id) REFERENCES Faculty(faculty_id)
+);
+
+-- 2. Junction table: Student_Courses (many-to-many: Students - Courses)
+CREATE TABLE Student_Courses (
+    student_id      INT NOT NULL,
+    course_id       INT NOT NULL,
+    enrollment_date DATE,
+    PRIMARY KEY (student_id, course_id),
+    CONSTRAINT fk_sc_student
+        FOREIGN KEY (student_id) REFERENCES Students(student_id),
+    CONSTRAINT fk_sc_course
+        FOREIGN KEY (course_id) REFERENCES Courses(course_id)
+);
+
+-- 3. Junction table: Student_Activities (many-to-many: Students - Activities)
+CREATE TABLE Student_Activities (
+    student_id      INT NOT NULL,
+    activity_id     INT NOT NULL,
+    join_date       DATE,
+    PRIMARY KEY (student_id, activity_id),
+    CONSTRAINT fk_sa_student
+        FOREIGN KEY (student_id) REFERENCES Students(student_id),
+    CONSTRAINT fk_sa_activity
+        FOREIGN KEY (activity_id) REFERENCES Extra_Curricular_Activities(activity_id)
+);
+
+-- INSERT statements Extra_Curricular_Activities (5 sample rows)
+INSERT INTO Extra_Curricular_Activities (activity_name, activity_type, meeting_day, advisor_id) VALUES
+('Football Club',        'Sports', 'Monday',    1),
+('Debate Society',       'Club',   'Wednesday', 2),
+('Chess Club',           'Club',   'Tuesday',   3),
+('School Choir',         'Music',  'Thursday',  1),
+('Robotics Team',        'STEM',   'Friday',    2);
+
+-- INSERT statements  Student_Courses (sample enrollments)
+INSERT INTO Student_Courses (student_id, course_id, enrollment_date) VALUES
+(1, 1, '2026-01-15'),
+(1, 2, '2026-01-15'),
+(2, 1, '2026-01-16'),
+(3, 3, '2026-01-16'),
+(4, 2, '2026-01-17');
+
+-- INSERT statements Student_Activities (sample participation)
+INSERT INTO Student_Activities (student_id, activity_id, join_date) VALUES
+(1, 1, '2026-01-20'),
+(2, 1, '2026-01-20'),
+(3, 2, '2026-01-21'),
+(4, 3, '2026-01-22'),
+(5, 4, '2026-01-23');
+
+-- MEMBER E — Individual UPDATE / DELETE / SELECT
+
+-- UPDATE: change the meeting day of the Chess Club
+UPDATE Extra_Curricular_Activities
+SET meeting_day = 'Saturday'
+WHERE activity_name = 'Chess Club';
+
+-- DELETE: remove a specific student's activity record
+DELETE FROM Student_Activities
+WHERE student_id = 5 AND activity_id = 4;
+
+-- SELECT with WHERE: all activities advised by faculty_id = 1
+SELECT activity_id, activity_name, activity_type, meeting_day
+FROM Extra_Curricular_Activities
+WHERE advisor_id = 1;
