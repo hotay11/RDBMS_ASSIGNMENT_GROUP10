@@ -218,4 +218,4 @@ WHERE student_id = 4 AND activity_id = 4;
 -- SELECT with WHERE: all activities advised by faculty_id = 1
 SELECT activity_id, activity_name, activity_type, meeting_day
 FROM Extra_Curricular_Activities
-iHERE advisor_id = 1;
+WHERE advisor_id = 1;
