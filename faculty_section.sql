@@ -254,12 +254,14 @@ WHERE a.advisor_id IS NOT NULL AND f.faculty_id IS NULL;
 
 -- Normalization Check:
 -- All information is stored only once in its own table (Students, Classroom,
---It is referenced only by other tables such as -- Faculty, Courses, Extra_Curricular_Activities.
--- In terms of the ID, but not repeating information such as names or departments. The many-to-many
--- relationships between Students and Courses and between Students and Activities.
---Using junction tables (Student_Courses, Student_Activities) correctly solves the problems: --
--- student, registration, and date information, while eliminating duplicate student, registration, and date data.
---Data for -- course, or activity.
+-- Faculty, Courses, Extra_Curricular_Activities). Other tables reference
+-- this information only by ID (e.g. faculty_id, classroom_id) rather than
+-- repeating descriptive data such as names or departments. The many-to-many
+-- relationships between Students and Courses, and between Students and
+-- Activities, are correctly handled using junction tables
+-- (Student_Courses, Student_Activities). This avoids duplicating student,
+-- course, or activity data while still capturing enrollment/join dates for
+-- each relationship.
 
 -- Join Query 1: Student enrolled in a course, taught by faculty, in a classroom
 SELECT s.first_name, s.last_name, co.course_name, f.name AS faculty_name, cl.room_number
