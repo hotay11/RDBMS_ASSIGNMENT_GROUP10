@@ -110,6 +110,7 @@ WHERE department='Law';
 -- === Member D (Manzi Luc Divin): Courses table ===
 USE alu_db;
 
+-- Step 1: Create the Courses table
 CREATE TABLE Courses (
     course_id INT AUTO_INCREMENT PRIMARY KEY,
     course_name VARCHAR(100) NOT NULL,
@@ -120,6 +121,7 @@ CREATE TABLE Courses (
     FOREIGN KEY (classroom_id) REFERENCES Classroom(classroom_id)
 );
 
+-- Step 2: Insert 5 sample courses
 INSERT INTO Courses (course_name, credits, faculty_id, classroom_id) VALUES
 ('Introduction to Programming', 3, 1, 1),
 ('Database Systems', 4, 2, 2),
@@ -127,18 +129,19 @@ INSERT INTO Courses (course_name, credits, faculty_id, classroom_id) VALUES
 ('Law', 2, 5, 4),
 ('Engineering Mechanics', 4, 1, 2);
 
--- UPDATE
+-- Step 3: UPDATE - increase credits for Database Systems
 UPDATE Courses
 SET credits = 5
-WHERE course_id = 2;
+WHERE course_id = 2;  -- course_id for Database Systems
 
--- DELETE
+-- Step 4: DELETE - remove Business Law course
 DELETE FROM Courses
-WHERE course_id = 4;
+WHERE course_id = 4;  -- course_id for Business Law
 
--- SELECT with WHERE
+-- Step 5: SELECT with WHERE - find all courses worth 4 credits
 SELECT *
 FROM Courses
+<<<<<<< HEAD
 WHERE credits = 4;
 
 -- == MEMBER E (Bugingo Nshuti Brandon)  (Student_Courses, Student_Activities) ==
@@ -217,3 +220,6 @@ WHERE student_id = 5 AND activity_id = 4;
 SELECT activity_id, activity_name, activity_type, meeting_day
 FROM Extra_Curricular_Activities
 WHERE advisor_id = 1;
+=======
+WHERE credits = 4;   
+>>>>>>> 4826d0904e9820b9d703d1f5f7c21bc2279fff7f
