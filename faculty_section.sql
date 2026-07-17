@@ -32,7 +32,6 @@ DELETE FROM Students WHERE student_id = 5;
 -- SELECT with WHERE: find students enrolled on a specific date
 SELECT * FROM Students WHERE enrollment_date = '2023-09-01';
 
-SELECT * FROM Students;
 
 
 -- === Member B (Chavyra BANGADI): Classroom table ===
@@ -79,6 +78,7 @@ WHERE building = 'Innovation Hall';
 
 
 -- Member C (Ezra Prince Situma): Faculty Table --
+use alu_db;
 
 -- Create the Faculty table with the required columns
 CREATE TABLE Faculty (
