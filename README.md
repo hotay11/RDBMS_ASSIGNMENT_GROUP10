@@ -1,0 +1,19 @@
+# ALU Database Project — README
+
+## Overview
+
+This is the common .sql file of our team's relational database project for a school system that has five entities: Students, Classroom, Faculty, Courses, and Extra_Curricular_Activities. All members used the same common database, alu_db, with a common build order to ensure that the foreign keys were met at each step.
+
+## Member Contributions
+
+Joshua created and designed the `Students` table, which has first_name, last_name, date_of_birth, email (unique), and enrollment_date columns, with student_id being the primary key and auto-incremented. He added five sample students, and showed how to manipulate data by updating a student's email address, deleting a student record, and writing a `SELECT` statement with a `WHERE` clause to filter students by enrollment date. Since the Students table has no dependencies on other tables, it was one of the first created in the build order.
+
+Chavyra created the table `Classroom` which contains rooms' number, building, and capacity, with an auto-incrementing primary key `classroom_id`. She added five sample classrooms in three buildings, adjusted the capacity of a room to accommodate a growth, removed a room that had been retired, and wrote a `WHERE`-clause filtered `SELECT` statement to get all classrooms in a particular building. Classroom did not have any outstanding dependencies, so it was created early, along with Joshua's table.
+
+Ezra has created the `Faculty` table, which contains each faculty member's name, email, and department, and has a primary key of `faculty_id`, which is auto-incremented. He inserted five sample faculty members with various departments, changed one of the faculty member's department, deleted a faculty member record, and wrote a `WHERE`-filtered `SELECT` query to retrieve faculty in a particular department. This table was also created early, as it has to be created before Courses and the activities table can refer to it.
+
+Manzi Luc Divin — Creates the table Courses, which depends on Faculty and Classroom, both of which are already created, as it has foreign keys to faculty_id and classroom_id. He added the fields for course name and credit, added five sample courses, associated them with a faculty member and classroom, changed the credit value of one course, removed one course record, and wrote a `WHERE`-filtered `SELECT` statement to get all courses with a certain credit value. This table was created after the first three tables due to its dependencies.
+
+The more dependent part of the schema was the Extra_Curricular_Activities table (which is dependent on and has a foreign key to the Faculty table) and the two junction tables, Student_Courses and Student_Activities, which link Students to Courses and Students to Activities. He added sample data for all three tables, modified an activity's meeting day, removed an individual student-activity enrollment record, and wrote a `WHERE`-clause filtered `SELECT` statement on the activities table. These tables are built last since they refer to all other tables in the schema.
+
+After all five of the individual tables had data in them, Prince was given the group-level requirements that bring the whole schema together, (relationships, normalization, joins, aggregate). He wrote the relationship-check queries that ensure that each foreign key is correct and refers to a valid primary key without orphaned references, wrote the normalization paragraph to explain how the schema avoids data duplication in the two junction tables, wrote the three `JOIN` queries that connect Students, Courses, Faculty, Classroom, and Activities into complete and readable sentences of information, and wrote the aggregate query using `COUNT()` and `GROUP BY` to determine how many students are enrolled in each course.
