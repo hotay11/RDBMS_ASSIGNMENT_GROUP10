@@ -15,11 +15,6 @@ CREATE TABLE Students (
     classroom_id INT              
 );
 
-ALTER TABLE Students              
-    ADD CONSTRAINT fk_students_classroom
-    FOREIGN KEY (classroom_id) REFERENCES Classroom(classroom_id);
-);
-
 -- Insert 5 sample rows
 INSERT INTO Students (first_name, last_name, date_of_birth, email, enrollment_date, classroom_id) VALUES
 ('Aisha', 'Karenzi', '2008-03-15', 'aisha.k@school.edu', '2023-09-01', 1),
@@ -55,6 +50,9 @@ CREATE TABLE Classroom (
     capacity     INT          NOT NULL
 );
 
+ALTER TABLE Students
+    ADD CONSTRAINT fk_students_classroom
+    FOREIGN KEY (classroom_id) REFERENCES Classroom(classroom_id);
 
 -- Step 3: Insert 5 sample classrooms so the table has data to work with
 INSERT INTO Classroom (room_number, building, capacity) VALUES
